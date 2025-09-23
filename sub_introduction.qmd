@@ -1,0 +1,465 @@
+---
+title: Programación Orientada al Análisis de Datos
+authors:
+    author: "Emilio López Cano, Rubén Rodríguez Fernández, Víctor Aceña Gil"
+    date: "Curso 2025-26"
+    corresponding: true
+---
+
+# Datos de la asignatura
+
+```{r, echo=FALSE}
+library(reticulate)
+py_require("numpy")
+py_require("pandas")
+py_require("matplotlib")
+py_require("seaborn")
+```
+
+## Guia docente
+
+- Tipo: Obligatoria
+- Período de impartición: Primer curso, primer semestre
+- Nº de créditos: 6 ECTS
+  - Horas totales: 150h (60h presenciales / 90h trabajo autónomo)
+- Departamento: Departamento de Informática y Estadística
+- Campus: Móstoles
+- Máster: Análisis de Datos Deportivos
+- Aula: Aulario I, Seminario 110
+
+# Profesorado
+
+## Prof. Emilio López Cano
+- E-mail: `emilio.lopez@urjc.es`
+- Tutorías: Concertar por el correo del aula virtual
+- Despacho: 043, Departamental II, Móstoles
+- [Web URJC](https://servicios.urjc.es/pdi/ver/emilio.lopez)
+
+## Prof. Rubén Rodríguez Fernández
+- E-mail: `ruben.rodriguez@urjc.es`
+- Tutorías: Concertar por el correo del aula virtual
+- Despacho: 131, Departamental II, Móstoles
+- [Web URJC](https://servicios.urjc.es/pdi/ver/ruben.rodriguez)
+
+
+## Prof. Víctor Aceña Gil
+- E-mail: `victor.acena@urjc.es`
+- Despacho: 131, Departamental II, Móstoles
+- [Web URJC](https://servicios.urjc.es/pdi/ver/victor.acena)
+
+# Motivación
+## El análisis de datos deportivos está en todas partes
+
+- Plataformas de tracking deportivo (Strava, Garmin Connect)
+- Análisis de rendimiento en equipos profesionales
+- Sistemas de scouting y reclutamiento
+- Monitorización biomecánica en tiempo real
+- Analytics en retransmisiones deportivas
+- Aplicaciones móviles de entrenamiento personalizado
+
+## Python y R dominan el análisis de datos
+
+::: {.columns}
+::: {.column width="50%"}
+**Python**
+
+- NumPy, Pandas, Matplotlib
+- Scikit-learn, TensorFlow
+- Jupyter Notebooks
+- APIs y web scraping
+:::
+
+::: {.column width="50%"}
+**R**
+
+- Tidyverse (dplyr, ggplot2)
+- Análisis estadístico avanzado
+- R Markdown
+- Visualizaciones especializadas
+:::
+:::
+
+## Objetivos
+
+- Dominar **Python y R** para análisis de datos deportivos
+- Aprender a **manipular y limpiar** grandes conjuntos de datos
+- Crear **visualizaciones efectivas** de métricas deportivas
+- Desarrollar **scripts automatizados** para análisis en tiempo real
+- Implementar **buenas prácticas** de programación y control de versiones
+- Aplicar técnicas de análisis a **casos reales** del deporte
+
+# Temario
+
+
+## Tema 1: Elementos básicos de programación
+
+- Definición de variables
+- Introducción a las estructuras de control
+- Agrupar funcionalidades en funciones
+- Depuración
+
+::: {.panel-tabset}
+
+### Python
+```python
+# Variables y funciones básicas
+def calcular_imc(peso, altura):
+    """Calcula el IMC de un atleta"""
+    imc = peso / (altura ** 2)
+    return round(imc, 2)
+
+atleta_peso = 75  # kg
+atleta_altura = 1.80  # metros
+print(f"IMC: {calcular_imc(atleta_peso, atleta_altura)}")
+```
+
+### R
+```r
+# Variables y funciones básicas
+calcular_imc <- function(peso, altura) {
+  # Calcula el IMC de un atleta
+  imc <- peso / (altura^2)
+  return(round(imc, 2))
+}
+
+atleta_peso <- 75    # kg
+atleta_altura <- 1.80  # metros
+cat("IMC:", calcular_imc(atleta_peso, atleta_altura))
+```
+
+:::
+
+## Tema 2: Estructuras de datos
+
+- Introducción a las estructuras de datos
+- Vectores, matrices y arrays.
+
+::: {.panel-tabset}
+
+### Python
+```python
+import numpy as np
+import pandas as pd
+
+# Crear matriz de rendimiento semanal
+rendimiento = np.array([
+    [85, 92, 78, 88],  # Jugador 1
+    [90, 85, 95, 87]   # Jugador 2
+])
+
+# Convertir a DataFrame para mejor visualización
+df = pd.DataFrame(rendimiento, 
+                  index=['Jugador1', 'Jugador2'],
+                  columns=['Sem1', 'Sem2', 'Sem3', 'Sem4'])
+print(df)
+```
+
+### R
+```r
+# Crear matriz de rendimiento semanal
+rendimiento <- matrix(
+  c(85, 92, 78, 88, 90, 85, 95, 87), 
+  nrow = 2, ncol = 4,
+  dimnames = list(c("Jugador1", "Jugador2"), 
+                  c("Sem1", "Sem2", "Sem3", "Sem4"))
+)
+print(rendimiento)
+```
+
+:::
+
+## Tema 3: Control de versiones
+
+- Herramientas de control de versiones
+- Introducción a git
+- Colaboración a través con git a través de Github
+
+
+## Tema 4: Importación y exportación de ficheros
+
+- Lectura y escritura de datos en diferentes formatos.
+- Excel, JSON, CSV.
+
+::: {.panel-tabset}
+
+### Python
+```python
+import pandas as pd
+
+# Leer datos de diferentes formatos
+df_csv = pd.read_csv('resultados.csv')
+df_excel = pd.read_excel('estadisticas.xlsx', sheet_name='Temporada2024')
+
+# Exportar resultados
+df_csv.to_json('resultados.json', orient='records')
+df_csv.to_parquet('resultados.parquet')  # Formato eficiente
+```
+
+### R
+```r
+library(readxl)
+library(jsonlite)
+
+# Leer datos de diferentes formatos
+df_csv <- read.csv('resultados.csv')
+df_excel <- read_excel('estadisticas.xlsx', sheet = 'Temporada2024')
+
+# Exportar resultados
+write_json(df_csv, 'resultados.json')
+write.csv(df_csv, 'resultados_procesados.csv', row.names = FALSE)
+```
+
+:::
+
+## Tema 5: Manipulación de datos
+
+- Manipulación de datos multidimensionales
+- En R, librerías como Dplyr, tidyr
+- En Python, pandas y numpy
+
+::: {.panel-tabset}
+
+### Python
+```python
+import pandas as pd
+
+# Pipeline de transformación con pandas
+resultado = (jugadores
+    .query('minutos_jugados > 900')
+    .assign(goles_por_partido = lambda x: x.goles / x.partidos)
+    .sort_values('goles_por_partido', ascending=False)
+    .loc[:, ['nombre', 'goles_por_partido', 'posicion']]
+)
+```
+
+### R
+```r
+library(dplyr)
+
+# Pipeline de transformación
+resultado <- jugadores %>%
+  filter(minutos_jugados > 900) %>%
+  mutate(goles_por_partido = goles / partidos) %>%
+  arrange(desc(goles_por_partido)) %>%
+  select(nombre, goles_por_partido, posicion)
+```
+
+:::
+
+## Tema 6: Visualización de datos deportivos
+
+- Creación de visualizaciones de datos
+- Enfoque en el ámbito deportivo
+- Creación de documentación reproducible con Quarto
+
+::: {.panel-tabset}
+
+### Python
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Gráfico de radar para habilidades
+def grafico_radar(habilidades, jugador):
+    angles = np.linspace(0, 2*np.pi, len(habilidades), endpoint=False)
+    angles = np.concatenate((angles, [angles[0]]))
+    
+    fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(projection='polar'))
+    ax.plot(angles, habilidades + [habilidades[0]], 'b-', linewidth=2)
+    ax.fill(angles, habilidades + [habilidades[0]], alpha=0.3)
+    plt.title(f'Perfil de habilidades - {jugador}')
+    return fig
+```
+
+### R
+```r
+library(ggplot2)
+
+# Gráfico de radar para habilidades
+ggplot(habilidades, aes(x = habilidad, y = puntuacion, 
+                        group = jugador, color = jugador)) +
+  geom_polygon(alpha = 0.3, fill = NA) +
+  geom_point(size = 3) +
+  coord_polar() + 
+  theme_minimal() +
+  labs(title = "Perfil de Habilidades por Jugador")
+```
+
+:::
+
+## Tema 7: Tratamiento de errores
+
+- Gestión de errores 
+- Trazas de ejecución (logging)
+
+::: {.panel-tabset}
+
+### Python
+```python
+import logging
+import pandas as pd
+
+# Configurar logging
+logging.basicConfig(level=logging.INFO)
+
+def procesar_datos_gps(archivo):
+    try:
+        datos = pd.read_csv(archivo)
+        logging.info(f"Procesados {len(datos)} puntos GPS")
+        return datos
+    except FileNotFoundError:
+        logging.error(f"Archivo {archivo} no encontrado")
+        return None
+    except Exception as e:
+        logging.error(f"Error inesperado: {e}")
+        return None
+```
+
+### R
+```r
+library(tryCatch)
+library(futile.logger)
+
+# Configurar logging
+flog.threshold(INFO)
+
+procesar_datos_gps <- function(archivo) {
+  tryCatch({
+    datos <- read.csv(archivo)
+    flog.info("Procesados %s puntos GPS", nrow(datos))
+    return(datos)
+  }, error = function(e) {
+    flog.error("Error al procesar %s: %s", archivo, e$message)
+    return(NULL)
+  })
+}
+```
+
+:::
+
+## Tema 8: Procesos ETL e integración
+
+- Web Scrapping de datos
+- Utilización de APIs
+- Creación de pipelines
+
+::: {.panel-tabset}
+
+### Python
+```python
+import requests
+import pandas as pd
+
+# Consumir API de resultados deportivos
+def obtener_partidos_api():
+    try:
+        response = requests.get('https://api.deportes.com/partidos/hoy')
+        if response.status_code == 200:
+            partidos = response.json()
+            df = pd.DataFrame(partidos)
+            return df[['equipo_local', 'equipo_visitante', 'resultado']]
+    except requests.RequestException as e:
+        print(f"Error en API: {e}")
+        return None
+```
+
+### R
+```r
+library(httr)
+library(jsonlite)
+
+# Consumir API de resultados deportivos
+obtener_partidos_api <- function() {
+  tryCatch({
+    response <- GET("https://api.deportes.com/partidos/hoy")
+    if (status_code(response) == 200) {
+      partidos <- fromJSON(content(response, "text"))
+      return(partidos[c("equipo_local", "equipo_visitante", "resultado")])
+    }
+  }, error = function(e) {
+    message("Error en API: ", e$message)
+    return(NULL)
+  })
+}
+```
+
+:::
+
+
+# Metodología 
+## Metodología Docente
+
+- **Aprendizaje basado en proyectos** con datos deportivos reales
+- **Clases teóricas** combinadas con **sesiones prácticas intensivas**
+- **Laboratorios experimentales** con ordenador
+- **Trabajo autónomo** guiado con ejercicios progresivos
+- **Presentaciones orales** de proyectos
+- **Tutorías académicas** personalizadas
+
+# Herramientas y Software
+
+## Lenguajes de Programación
+
+::: {.columns}
+::: {.column width="50%"}
+### Librerías Python
+
+- **Python 3.x** (Anaconda distribution)
+- NumPy, Pandas, SciPy
+- Matplotlib, Seaborn
+- Jupyter Notebooks
+
+:::
+::: {.column width="50%"}
+### Librerías R
+
+- **R** (última versión estable)
+- Tidyverse (dplyr, ggplot2, tidyr)
+- R Markdown
+:::
+:::
+
+### Otras herramientas
+
+- Git/GitHub
+- [Positron](https://positron.posit.co)
+
+# Evaluación
+
+## Sistema de evaluación continua
+
+- **SE1 - Pruebas escritas (20%)**
+  - Nota mínima: 4
+- **SE2 - Resolución de problemas (20%)**
+  - Ejercicios prácticos, nota mínima: 4
+- **SE3 - Documentos/Informes (20%)**
+  - Memorias de prácticas, nota mínima: 5
+- **SE5 - Evaluación de prácticas (40%)**
+  - Proyectos de laboratorio, nota mínima: 5
+
+**Nota final**: Media ponderada si todas las pruebas superan la nota mínima
+
+# Recursos y Bibliografía
+## Recursos y Bibliografía
+
+::: {.columns}
+::: {.column width="50%"}
+### Bibliografía Básica
+
+- **Matthes, E.** (2023). *Python Crash Course*
+- **McKinney, W.** (2022). *Python for Data Analysis*
+- **Wickham, H. et al.** (2023). *R for Data Science* [online]
+- **Cano, E.L.** (2024). *Introducción al software estadístico R* [online]
+:::
+::: {.column width="50%"}
+### Recursos Online
+
+- Material en el aula virtual
+- Documentación oficial de Python/R
+- Jupyter Notebooks con ejemplos deportivos
+- Datasets deportivos para practicar
+- Repositorios GitHub del curso
+:::
+:::
+
+# ¿Preguntas?
