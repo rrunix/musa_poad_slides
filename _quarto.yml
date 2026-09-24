@@ -4,7 +4,7 @@ project:
 
 format:
   revealjs:
-    theme: [simple, metropolis-beamer/custom.scss]
+    theme: [simple, metropolis-beamer/custom.scss, urjc.scss]
     filters: 
       - metropolis-beamer/metropolis-header.lua
       - metropolis-beamer/custom-block.lua

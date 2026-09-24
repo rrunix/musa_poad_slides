@@ -25,7 +25,7 @@ py_require("seaborn")
 - Departamento: Departamento de Informática y Estadística
 - Campus: Móstoles
 - Máster: Análisis de Datos Deportivos
-- Aula: Aulario I, Seminario 110
+- Aula: Aulario III, Seminario 203
 
 # Profesorado
 
@@ -48,7 +48,7 @@ py_require("seaborn")
 - [Web URJC](https://servicios.urjc.es/pdi/ver/victor.acena)
 
 # Motivación
-## El análisis de datos deportivos está en todas partes
+## Análisis de datos deportivos en todas partes
 
 - Plataformas de tracking deportivo (Strava, Garmin Connect)
 - Análisis de rendimiento en equipos profesionales
