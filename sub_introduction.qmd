@@ -8,13 +8,7 @@ authors:
 
 # Datos de la asignatura
 
-```{r, echo=FALSE}
-library(reticulate)
-py_require("numpy")
-py_require("pandas")
-py_require("matplotlib")
-py_require("seaborn")
-```
+
 
 ## Guia docente
 
